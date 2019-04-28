@@ -23,36 +23,42 @@ extern void yyerror(const char*, char);
                                 strcpy(yylval.ident, yytext);
                                 return ARTICLE;     
                             }
-"He"|"he"|"She"|"she"|"it"|"It"|"They"|"they" {     
+"He"|"he"|"She"|"she"|"it"|"It"|"They"|"they"|"I" {     
                                 yylval.ident = new char[strlen(yytext)+1];
                                 strcpy(yylval.ident, yytext);
                                 return PRONOUN;     
                             }
-"Beautiful"|"beautiful"|"Good"|"good"|"Bad"|"bad" {     
+"Beautiful"|"beautiful"|"Good"|"good"|"Bad"|"bad"|"intelligent" {     
                                 yylval.ident = new char[strlen(yytext)+1];
                                 strcpy(yylval.ident, yytext);
                                 return ADJECTIVE;    
                             }
-"Slowly"|"slowly"|"Fastly"|"fastly"|"fast" {        
+"Slowly"|"slowly"|"Fastly"|"fastly"|"fast"|"not" {        
                                 yylval.ident = new char[strlen(yytext)+1];
                                 strcpy(yylval.ident, yytext);
                                 return ADVERB;      
                             }
-"Running"|"running"|"Keeping"|"keeping"|"Playing"|"playing"|"Coding"|"coding" {       
+"Running"|"running"|"Keeping"|"keeping"|"Playing"|"playing"|"Coding"|"coding"|"lives"|"jumped"|"become" {       
                             yylval.ident = new char[strlen(yytext)+1];
                             strcpy(yylval.ident, yytext);
                             return VERB;        
                         }
-"is"|"Is"|"was"|"Was" {       
+"is"|"Is"|"was"|"Was"|"will" {       
                         yylval.ident = new char[strlen(yytext)+1];
                         strcpy(yylval.ident, yytext);
                         return AVERB;        
                         }
-"and"|"And"|"But"|"but" {
+"and"|"And"|"But"|"but"|"or"|"because" {
                         yylval.ident = new char[strlen(yytext)+1];
                         strcpy(yylval.ident, yytext);  
                         return CONJUNCTION;     
                     }
+"in"|"with"|"on" {
+                        yylval.ident = new char[strlen(yytext)+1];
+                        strcpy(yylval.ident, yytext);  
+                        return PREPOSITION;     
+                    }
+
 [A-Z][a-z]*   {   
                     yylval.ident = new char[strlen(yytext)+1];
                     strcpy(yylval.ident, yytext);

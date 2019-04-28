@@ -43,6 +43,7 @@ void yyerror(const char* s, char c) {
 %token<ident> CONJUNCTION "conjunction"
 %token<ident> ARTICLE  "article"
 %token<ident> PRONOUN  "pronoun"
+%token<ident> PREPOSITION  "preposition"
 
 %%
 
@@ -53,6 +54,15 @@ Code        :   Code Statement
 Statement   :   EXPR NOUN   {cout << "Grammatically Correct\n";}
             |   NOUN AVERB ADJECTIVE    {cout << "Grammatically Correct\n";}
             |   NOUN AVERB VERB {cout << "Grammatically Correct\n";}
+            |   NOUN AVERB VERB NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush is playing Football"
+            |   PRONOUN AVERB VERB NOUN {cout << "Grammatically Correct\n";}  // Example : "He is playing Football"
+            |   NOUN AVERB ARTICLE ADJECTIVE NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush is a good boy"
+            |   PRONOUN AVERB ARTICLE ADJECTIVE NOUN {cout << "Grammatically Correct\n";}  // Example : "He is a good boy"
+            |   NOUN AVERB ADJECTIVE CONJUNCTION ADJECTIVE {cout << "Grammatically Correct\n";}  // Example : "Ayush is intelligent and beautiful"
+            |   NOUN VERB PREPOSITION NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush lives in Allahabad"
+            |   ARTICLE NOUN VERB PREPOSITION ARTICLE NOUN {cout << "Grammatically Correct\n";}  // Example : "The cat jumped on the table"
+            |   NOUN AVERB PREPOSITION NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush is in Ibiza"
+            |   NOUN AVERB VERB ARTICLE NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush will become a scientist"
             |   Invalid
             ;
 
