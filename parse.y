@@ -44,6 +44,9 @@ void yyerror(const char* s, char c) {
 %token<ident> ARTICLE  "article"
 %token<ident> PRONOUN  "pronoun"
 %token<ident> PREPOSITION  "preposition"
+%token<ident> PMARK  "pmark"
+%token<ident> END  "end"
+
 
 %%
 
@@ -51,25 +54,44 @@ Code        :   Code Statement
             |   Statement
             ;
 
-Statement   :   EXPR NOUN   {cout << "Grammatically Correct\n";}
-            |   NOUN AVERB ADJECTIVE    {cout << "Grammatically Correct\n";}
-            |   NOUN AVERB VERB {cout << "Grammatically Correct\n";}
-            |   NOUN AVERB VERB NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush is playing Football"
-            |   PRONOUN AVERB VERB NOUN {cout << "Grammatically Correct\n";}  // Example : "He is playing Football"
-            |   NOUN AVERB ARTICLE ADJECTIVE NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush is a good boy"
-            |   PRONOUN AVERB ARTICLE ADJECTIVE NOUN {cout << "Grammatically Correct\n";}  // Example : "He is a good boy"
-            |   NOUN AVERB ADJECTIVE CONJUNCTION ADJECTIVE {cout << "Grammatically Correct\n";}  // Example : "Ayush is intelligent and beautiful"
-            |   NOUN VERB PREPOSITION NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush lives in Allahabad"
-            |   ARTICLE NOUN VERB PREPOSITION ARTICLE NOUN {cout << "Grammatically Correct\n";}  // Example : "The cat jumped on the table"
-            |   NOUN AVERB PREPOSITION NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush is in Ibiza"
-            |   NOUN AVERB VERB ARTICLE NOUN {cout << "Grammatically Correct\n";}  // Example : "Ayush will become a scientist"
-            |   Invalid
+Statement   :  EXPR NOUN END   {cout << "Grammatically Correct\n";} // Example: "Hey Baba"
+            |  NOUN AVERB ADJECTIVE END   {cout << "Grammatically Correct\n";} // Example: "Baba is beautiful"
+            |  NOUN AVERB VERB END {cout << "Grammatically Correct\n";} // Example: "Baba is playing"
+            |  NOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is playing Football"
+            |  PRONOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "He is playing Football"
+            |  NOUN AVERB ARTICLE ADJECTIVE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is a good boy"
+            |  PRONOUN AVERB ARTICLE ADJECTIVE NOUN END {cout << "Grammatically Correct\n";}  // Example : "He is a good boy"
+            |  NOUN AVERB ADJECTIVE CONJUNCTION ADJECTIVE END {cout << "Grammatically Correct\n";}  // Example : "Baba is intelligent and beautiful"
+            |  NOUN VERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba lives in Allahabad"
+            |  ARTICLE NOUN VERB PREPOSITION ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "The cat jumped on the table"
+            |  NOUN AVERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is in Ibiza"
+            |  NOUN AVERB VERB ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba will become a scientist"
+            |  AVERB NOUN VERB PMARK { cout << "Grammatically Correct\n";  } // Example: "Is Baba playing?"
+            |  Invalid
             ;
 
-Invalid     :   NOUN EXPR   {
+Invalid     :  NOUN EXPR END   {
                                 std::string x = string($1);
                                 cout << "Suggestsed Edit : Swap " << x << " and " << ($2) << endl;
-                            }
+                           }
+            |  NOUN ADJECTIVE AVERB END   {
+                                          cout << "Suggestsed Edit : Swap " << ($2) << " and " << ($3) << endl;
+                                       }
+            |  AVERB NOUN ADJECTIVE END  {
+                                          cout << "Suggestsed Edit : Question Mark missing " << endl;
+                                       }
+            |  ADJECTIVE AVERB NOUN END   {
+                                          cout << "Suggestsed Edit : Swap " << ($1) << " and " << ($3) << endl;
+                                       }
+            |  VERB AVERB NOUN END   {
+                                          cout << "Suggestsed Edit : Swap " << ($1) << " and " << ($3) << endl;
+                                       }
+            |  NOUN VERB AVERB END   {
+                                          cout << "Suggestsed Edit : Swap " << ($2) << " and " << ($3) << endl;
+                                       }
+            |  AVERB NOUN VERB END  {
+                                          cout << "Suggestsed Edit : Question Mark missing " << endl;
+                                       }  
             ;
 %%
 
