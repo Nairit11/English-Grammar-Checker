@@ -23,7 +23,7 @@ extern void yyerror(const char*, char);
                                 strcpy(yylval.ident, yytext);
                                 return ARTICLE;     
                             }
-"He"|"he"|"She"|"she"|"it"|"It"|"They"|"they"|"I" {     
+"He"|"he"|"She"|"she"|"it"|"It"|"They"|"they"|"I"|"We" {     
                                 yylval.ident = new char[strlen(yytext)+1];
                                 strcpy(yylval.ident, yytext);
                                 return PRONOUN;     
@@ -43,7 +43,7 @@ extern void yyerror(const char*, char);
                             strcpy(yylval.ident, yytext);
                             return VERB;        
                         }
-"is"|"Is"|"was"|"Was"|"will"|"Will" {       
+"is"|"Is"|"was"|"Was"|"will"|"Will"|"are"|"Are" {       
                         yylval.ident = new char[strlen(yytext)+1];
                         strcpy(yylval.ident, yytext);
                         return AVERB;        

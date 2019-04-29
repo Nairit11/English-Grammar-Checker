@@ -54,19 +54,21 @@ Code        :   Code Statement
             |   Statement
             ;
 
-Statement   :  EXPR NOUN END   {cout << "Grammatically Correct\n";} // Example: "Hey Baba"
-            |  NOUN AVERB ADJECTIVE END   {cout << "Grammatically Correct\n";} // Example: "Baba is beautiful"
-            |  NOUN AVERB VERB END {cout << "Grammatically Correct\n";} // Example: "Baba is playing"
-            |  NOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is playing Football"
-            |  PRONOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "He is playing Football"
-            |  NOUN AVERB ARTICLE ADJECTIVE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is a good boy"
-            |  PRONOUN AVERB ARTICLE ADJECTIVE NOUN END {cout << "Grammatically Correct\n";}  // Example : "He is a good boy"
-            |  NOUN AVERB ADJECTIVE CONJUNCTION ADJECTIVE END {cout << "Grammatically Correct\n";}  // Example : "Baba is intelligent and beautiful"
-            |  NOUN VERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba lives in Allahabad"
-            |  ARTICLE NOUN VERB PREPOSITION ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "The cat jumped on the table"
-            |  NOUN AVERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is in Ibiza"
-            |  NOUN AVERB VERB ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba will become a scientist"
+Statement   :  EXPR NOUN END   {cout << "Grammatically Correct\n";} // Example: "Hey Baba."
+            |  NOUN AVERB ADJECTIVE END   {cout << "Grammatically Correct\n";} // Example: "Baba is beautiful."
+            |  NOUN AVERB VERB END {cout << "Grammatically Correct\n";} // Example: "Baba is playing."
+            |  NOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is playing Football."
+            |  PRONOUN AVERB VERB END {cout << "Grammatically Correct\n";} // Example: "We are playing."
+            |  PRONOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "He is playing Football."
+            |  NOUN AVERB ARTICLE ADJECTIVE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is a good boy."
+            |  PRONOUN AVERB ARTICLE ADJECTIVE NOUN END {cout << "Grammatically Correct\n";}  // Example : "He is a good boy."
+            |  NOUN AVERB ADJECTIVE CONJUNCTION ADJECTIVE END {cout << "Grammatically Correct\n";}  // Example : "Baba is intelligent and beautiful."
+            |  NOUN VERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba lives in Allahabad."
+            |  ARTICLE NOUN VERB PREPOSITION ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "The cat jumped on the table."
+            |  NOUN AVERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is in Ibiza."
+            |  NOUN AVERB VERB ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba will become a scientist."
             |  AVERB NOUN VERB PMARK { cout << "Grammatically Correct\n";  } // Example: "Is Baba playing?"
+            |  AVERB NOUN ADJECTIVE PMARK { cout << "Grammatically Correct\n";  } // Example: "Is Baba playing?"
             |  Invalid
             ;
 
@@ -91,7 +93,14 @@ Invalid     :  NOUN EXPR END   {
                                        }
             |  AVERB NOUN VERB END  {
                                           cout << "Suggestsed Edit : Question Mark missing " << endl;
-                                       }  
+                                       }
+            |  NOUN VERB AVERB NOUN END   {
+                                          cout << "Suggestsed Edit : Swap " << ($2) << " and " << ($3) << endl;
+                                       }
+            |  NOUN VERB NOUN END   {
+                                          cout << "Suggestsed Edit : Adverb missing" << endl;
+                                       }
+                           
             ;
 %%
 
