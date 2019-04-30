@@ -68,7 +68,8 @@ Statement   :  EXPR NOUN END   {cout << "Grammatically Correct\n";} // Example: 
             |  NOUN AVERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is in Ibiza."
             |  NOUN AVERB VERB ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba will become a scientist."
             |  AVERB NOUN VERB PMARK { cout << "Grammatically Correct\n";  } // Example: "Is Baba playing?"
-            |  AVERB NOUN ADJECTIVE PMARK { cout << "Grammatically Correct\n";  } // Example: "Is Baba playing?"
+            |  AVERB NOUN ADJECTIVE PMARK { cout << "Grammatically Correct\n";  } // Example: "Is Baba beautiful?"
+            |  NOUN AVERB ARTICLE NOUN { cout << "Grammatically Correct\n";   } // Example: "Baba is a boy."
             |  Invalid
             ;
 
@@ -97,10 +98,87 @@ Invalid     :  NOUN EXPR END   {
             |  NOUN VERB AVERB NOUN END   {
                                           cout << "Suggestsed Edit : Swap " << ($2) << " and " << ($3) << endl;
                                        }
-            |  NOUN VERB NOUN END   {
-                                          cout << "Suggestsed Edit : Adverb missing" << endl;
-                                       }
-                           
+            | PRONOUN AVERB END  {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            | NOUN AVERB END  {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            | NOUN AVERB ARTICLE END {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            | ARTICLE END {
+               cout << "Incomplete Sentence" << endl;
+            }
+             
+            | ARTICLE NOUN END {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            | AVERB END {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            | AVERB NOUN END {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            | NOUN END {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            |PRONOUN END {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            |VERB END {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            |ADJECTIVE END {
+               cout << "Incomplete Sentence" << endl;
+            }
+
+            |PREPOSITION END {
+               cout << "Incomplete Sentence" << endl;
+            }
+            | NOUN ADJECTIVE END{
+               cout << "Missing auxillary_verb" << endl;
+            }
+            | NOUN VERB END{
+               cout << "Missing auxillary_verb" << endl;
+            }
+            | NOUN ARTICLE ADJECTIVE NOUN END {
+               cout << "Missing auxillary_verb" << endl;
+            }
+            
+            | NOUN VERB NOUN END{
+               cout << "Missing auxillary_verb" << endl;
+            }
+            | PRONOUN ADJECTIVE END{
+               cout << "Missing auxillary_verb" << endl;
+            }
+            | PRONOUN VERB END{
+               cout << "Missing auxillary_verb" << endl;
+            }
+            | PRONOUN ARTICLE ADJECTIVE NOUN END {
+               cout << "Missing auxillary_verb" << endl;
+            }
+            | PRONOUN VERB NOUN END{
+               cout << "Missing auxillary_verb" << endl;
+            }
+            | NOUN PREPOSITION NOUN END {
+               cout << "Missing verb" << endl;
+            }
+            | NOUN AVERB ARTICLE NOUN END {
+               cout << "Missing verb" << endl;
+            }
+            | NOUN AVERB ADJECTIVE CONJUNCTION END {
+               cout << "Incomplete Sentence" << endl;
+            }
             ;
 %%
 

@@ -43,7 +43,7 @@ extern void yyerror(const char*, char);
                             strcpy(yylval.ident, yytext);
                             return VERB;        
                         }
-"is"|"Is"|"was"|"Was"|"will"|"Will"|"are"|"Are" {       
+"is"|"Is"|"was"|"Was"|"will"|"Will"|"are"|"Are"|"am" {       
                         yylval.ident = new char[strlen(yytext)+1];
                         strcpy(yylval.ident, yytext);
                         return AVERB;        
@@ -68,7 +68,7 @@ extern void yyerror(const char*, char);
                         strcpy(yylval.ident, yytext);  
                         return END; 
 }
-[A-Z][a-z]*   {   
+[A-Z]*[a-z]*   {   
                     yylval.ident = new char[strlen(yytext)+1];
                     strcpy(yylval.ident, yytext);
                     return NOUN;    
