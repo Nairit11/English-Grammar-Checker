@@ -39,7 +39,7 @@ void yyerror(const char* s, char c) {
 %token<ident> VERB  "verb"
 %token<ident> ADVERB "adverb"
 %token<ident> ADJECTIVE  "adjective"
-%token<ident> AVERB  "auxillary_verb"
+%token<ident> AVERB  "auxiliary-verb"
 %token<ident> CONJUNCTION "conjunction"
 %token<ident> ARTICLE  "article"
 %token<ident> PRONOUN  "pronoun"
@@ -54,22 +54,22 @@ Code        :   Code Statement
             |   Statement
             ;
 
-Statement   :  EXPR { cout << "Read Expression "; } NOUN END   {cout << "Grammatically Correct\n";} // Example: "Hey Baba."
-            |  NOUN AVERB ADJECTIVE END   {cout << "Grammatically Correct\n";} // Example: "Baba is beautiful."
-            |  NOUN AVERB VERB END {cout << "Grammatically Correct\n";} // Example: "Baba is playing."
-            |  NOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is playing Football."
-            |  PRONOUN AVERB VERB END {cout << "Grammatically Correct\n";} // Example: "We are playing."
-            |  PRONOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "He is playing Football."
-            |  NOUN AVERB ARTICLE ADJECTIVE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is a good boy."
-            |  PRONOUN AVERB ARTICLE ADJECTIVE NOUN END {cout << "Grammatically Correct\n";}  // Example : "He is a good boy."
-            |  NOUN AVERB ADJECTIVE CONJUNCTION ADJECTIVE END {cout << "Grammatically Correct\n";}  // Example : "Baba is intelligent and beautiful."
-            |  NOUN VERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba lives in Allahabad."
-            |  ARTICLE NOUN VERB PREPOSITION ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "The cat jumped on the table."
-            |  NOUN AVERB PREPOSITION NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is in Ibiza."
-            |  NOUN AVERB VERB ARTICLE NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba will become a scientist."
-            |  AVERB NOUN VERB PMARK { cout << "Grammatically Correct\n";  } // Example: "Is Baba playing?"
-            |  AVERB NOUN ADJECTIVE PMARK { cout << "Grammatically Correct\n";  } // Example: "Is Baba beautiful?"
-            |  NOUN AVERB ARTICLE NOUN { cout << "Grammatically Correct\n";   } // Example: "Baba is a boy."
+Statement   :  EXPR { cout << "Expression "; } NOUN { cout << "Noun\n"; } END   {cout << "Grammatically Correct\n";} // Example: "Hey Baba."
+            |  NOUN AVERB ADJECTIVE END   {cout << "Noun auxiliary-verb Adjective. \n Grammatically Correct\n";} // Example: "Baba is beautiful."
+            |  NOUN AVERB VERB END {cout << "Noun auxiliary-verb Verb. \nGrammatically Correct\n";} // Example: "Baba is playing."
+            |  NOUN AVERB VERB NOUN END {cout << "Noun auxiliary-verb Verb Noun. \nGrammatically Correct\n";}  // Example : "Baba is playing Football."
+            |  PRONOUN AVERB VERB END {cout << "Pronoun auxiliary-verb Verb. \nGrammatically Correct\n";} // Example: "We are playing."
+            |  PRONOUN AVERB VERB NOUN END {cout << "Pronoun auxiliary-verb Verb Noun. \nGrammatically Correct\n";}  // Example : "He is playing Football."
+            |  NOUN AVERB ARTICLE ADJECTIVE NOUN END {cout <<"Noun auxiliary-verb article adjective noun. \nGrammatically Correct\n";}  // Example : "Baba is a good boy."
+            |  PRONOUN AVERB ARTICLE ADJECTIVE NOUN END {cout <<"Pronoun auxiliary-verb article adjective Noun. \nGrammatically Correct\n";}  // Example : "He is a good boy."
+            |  NOUN AVERB ADJECTIVE CONJUNCTION ADJECTIVE END {cout << "noun auxiliary-verb adjective conjunction adjective. \nGrammatically Correct\n";}  // Example : "Baba is intelligent and beautiful."
+            |  NOUN VERB PREPOSITION NOUN END {cout <<"noun verb preposition noun.  \nGrammatically Correct\n";}  // Example : "Baba lives in Allahabad."
+            |  ARTICLE NOUN VERB PREPOSITION ARTICLE NOUN END {cout << "artice noun verb preposition article noun. \nGrammatically Correct\n";}  // Example : "The cat jumped on the table."
+            |  NOUN AVERB PREPOSITION NOUN END {cout << "noun auxiliary-verb preposition noun . \nGrammatically Correct\n";}  // Example : "Baba is in Ibiza."
+            |  NOUN AVERB VERB ARTICLE NOUN END {cout << "noun auxiliary-verb verb artice noun. \nGrammatically Correct\n";}  // Example : "Baba will become a scientist."
+            |  AVERB NOUN VERB PMARK { cout << "auxiliary-verb noun verb ? \nGrammatically Correct\n";  } // Example: "Is Baba playing?"
+            |  AVERB NOUN ADJECTIVE PMARK { cout << "auxiliary-verb noun adjective ? \nGrammatically Correct\n";  } // Example: "Is Baba beautiful?"
+            |  NOUN AVERB ARTICLE NOUN { cout << "noun auxiliary-verb article noun. \nGrammatically Correct\n";   } // Example: "Baba is a boy."
             |  Invalid
             ;
 
@@ -146,29 +146,29 @@ Invalid     :  NOUN EXPR END   {
                cout << "Incomplete Sentence" << endl;
             }
             | NOUN ADJECTIVE END{
-               cout << "Missing auxillary_verb" << endl;
+               cout << "Missing auxiliary-verb before $(2) like is, was" << endl;
             }
             | NOUN VERB END{
-               cout << "Missing auxillary_verb" << endl;
+               cout << "Missing auxiliary-verb before $(2) like is, was" << endl;
             }
             | NOUN ARTICLE ADJECTIVE NOUN END {
-               cout << "Missing auxillary_verb" << endl;
+               cout << "Missing auxiliary-verb before $(2) like is, was" << endl;
             }
             
             | NOUN VERB NOUN END{
-               cout << "Missing auxillary_verb" << endl;
+               cout << "Missing auxiliary-verb before $(2) like is, was" << endl;
             }
             | PRONOUN ADJECTIVE END{
-               cout << "Missing auxillary_verb" << endl;
+               cout << "Missing auxiliary-verb before $(2) like is, was" << endl;
             }
             | PRONOUN VERB END{
-               cout << "Missing auxillary_verb" << endl;
+               cout << "Missing auxiliary-verb before $(2) like is, was" << endl;
             }
             | PRONOUN ARTICLE ADJECTIVE NOUN END {
-               cout << "Missing auxillary_verb" << endl;
+               cout << "Missing auxiliary-verb" << endl;
             }
             | PRONOUN VERB NOUN END{
-               cout << "Missing auxillary_verb" << endl;
+               cout << "Missing auxiliary-verb before $(2) like is, was" << endl;
             }
             | NOUN PREPOSITION NOUN END {
                cout << "Missing verb" << endl;
