@@ -54,7 +54,7 @@ Code        :   Code Statement
             |   Statement
             ;
 
-Statement   :  EXPR NOUN END   {cout << "Grammatically Correct\n";} // Example: "Hey Baba."
+Statement   :  EXPR { cout << "Read Expression "; } NOUN END   {cout << "Grammatically Correct\n";} // Example: "Hey Baba."
             |  NOUN AVERB ADJECTIVE END   {cout << "Grammatically Correct\n";} // Example: "Baba is beautiful."
             |  NOUN AVERB VERB END {cout << "Grammatically Correct\n";} // Example: "Baba is playing."
             |  NOUN AVERB VERB NOUN END {cout << "Grammatically Correct\n";}  // Example : "Baba is playing Football."
