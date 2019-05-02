@@ -54,7 +54,9 @@ extern int yydebug;
     CONJUNCTION = 264,
     ARTICLE = 265,
     PRONOUN = 266,
-    PREPOSITION = 267
+    PREPOSITION = 267,
+    PMARK = 268,
+    END = 269
   };
 #endif
 
@@ -67,7 +69,7 @@ union YYSTYPE
 
     char*                           ident;
 
-#line 71 "parse.tab.h" /* yacc.c:1909  */
+#line 73 "parse.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

@@ -12,7 +12,7 @@ extern void yyerror(const char*, char);
 
 
 %%
-[ \t\n]         {   }
+[ \r\t\s\n]+         { }
 "Hi"|"hi"|"hey"|"Hey"|"Hello"|"hello"   {   
                                             yylval.ident = new char[strlen(yytext)+1];
                                             strcpy(yylval.ident, yytext);
@@ -23,7 +23,7 @@ extern void yyerror(const char*, char);
                                 strcpy(yylval.ident, yytext);
                                 return ARTICLE;     
                             }
-"He"|"he"|"She"|"she"|"it"|"It"|"They"|"they"|"I" {     
+"He"|"he"|"She"|"she"|"it"|"It"|"They"|"they"|"I"|"We" {     
                                 yylval.ident = new char[strlen(yytext)+1];
                                 strcpy(yylval.ident, yytext);
                                 return PRONOUN;     
@@ -43,7 +43,7 @@ extern void yyerror(const char*, char);
                             strcpy(yylval.ident, yytext);
                             return VERB;        
                         }
-"is"|"Is"|"was"|"Was"|"will" {       
+"is"|"Is"|"was"|"Was"|"will"|"Will"|"are"|"Are"|"am" {       
                         yylval.ident = new char[strlen(yytext)+1];
                         strcpy(yylval.ident, yytext);
                         return AVERB;        
@@ -58,8 +58,17 @@ extern void yyerror(const char*, char);
                         strcpy(yylval.ident, yytext);  
                         return PREPOSITION;     
                     }
-
-[A-Z][a-z]*   {   
+"?" {
+                        yylval.ident = new char[strlen(yytext)+1];
+                        strcpy(yylval.ident, yytext);  
+                        return PMARK;     
+                    }
+"." {
+    yylval.ident = new char[strlen(yytext)+1];
+                        strcpy(yylval.ident, yytext);  
+                        return END; 
+}
+[A-Z]*[a-z]*   {   
                     yylval.ident = new char[strlen(yytext)+1];
                     strcpy(yylval.ident, yytext);
                     return NOUN;    
